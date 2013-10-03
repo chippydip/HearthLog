@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hearth Log", "Hearth Log\Hearth Log.vcxproj", "{1019FF89-E1F7-4CF9-8916-E7212CDAE2A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1019FF89-E1F7-4CF9-8916-E7212CDAE2A5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1019FF89-E1F7-4CF9-8916-E7212CDAE2A5}.Debug|Win32.Build.0 = Debug|Win32
+		{1019FF89-E1F7-4CF9-8916-E7212CDAE2A5}.Release|Win32.ActiveCfg = Release|Win32
+		{1019FF89-E1F7-4CF9-8916-E7212CDAE2A5}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
