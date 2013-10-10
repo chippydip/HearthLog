@@ -6,6 +6,12 @@
 
 #include <pcap.h>
 #include <thread>
+#include <chrono>
+#include <mutex>
+#include <set>
+
+std::set<std::string> deviceNames;
+std::mutex mu;
 
 int64_t toNanoTime(timeval ts) {
 	const int64_t NSEC_PER_SEC = 1e9;
@@ -18,25 +24,44 @@ void PacketCapture::Start(const std::string &filter, Callback::Factory callbackF
 {
 	wxCHECK2(callbackFactory, return);
 
-	char errbuf[PCAP_ERRBUF_SIZE];
+	// Start thread
+	auto thread = std::thread([filter, callbackFactory]() {
+		char errbuf[PCAP_ERRBUF_SIZE];
 
-	// Get all devices
-	pcap_if_t *alldevs;
-	if (pcap_findalldevs(&alldevs, errbuf) == -1) {
-		wxLogError("pcap_findalldevs: %s", errbuf);
-		return;
-	}
+		// Continually scan interfaces to handle waking from sleep other reason 
+		// an interface may be added (after possibly becoming invalid earlier).
+		while (1) {
+			// Get all devices
+			pcap_if_t *alldevs;
+			if (pcap_findalldevs(&alldevs, errbuf) == -1) {
+				wxLogError("pcap_findalldevs: %s", errbuf);
+				return;
+			}
 	
-	// Enumerate all devices and start a thread for each one
-	wxLogMessage(_("Interface List:"));
-	for (auto dev = alldevs; dev != nullptr; dev = dev->next) {
-		wxLogMessage("%s (%s)", dev->name, dev->description);
+			// Enumerate all devices and start a thread for each one
+			// we aren't already listening to.
+			{
+				std::lock_guard<std::mutex> lock(mu);
+				for (auto dev = alldevs; dev != nullptr; dev = dev->next) {
+					if (deviceNames.find(dev->name) == deviceNames.end()) {
+						deviceNames.insert(dev->name);
 
-		Start(filter, dev, callbackFactory);
-	}
+						wxLogMessage("listening to %s (%s)", dev->name, dev->description);
+						Start(filter, dev, callbackFactory);
+					}
+				}
+			}
 
-	// Done with the device list
-	pcap_freealldevs(alldevs);
+			// Done with the device list
+			pcap_freealldevs(alldevs);
+
+			// Wait a while until the next loop
+			std::this_thread::sleep_for(std::chrono::seconds(60));
+		}
+	});
+
+	// <thread> will be deleted once it completes
+	thread.detach();
 }
 
 void PacketCapture::Start(const std::string &filter, pcap_if_t *device, Callback::Factory callbackFactory)
@@ -54,7 +79,7 @@ void PacketCapture::Start(const std::string &filter, pcap_if_t *device, Callback
 		wxLogWarning("pcap_open_live(%s): %s", device->name, errbuf);
 	}
 
-	Start(filter, pcap, callbackFactory);
+	Start(filter, pcap, callbackFactory, device->name);
 }
 
 void PacketCapture::Start(const std::string &filter, const std::string &file, Callback::Factory callbackFactory)
@@ -73,7 +98,7 @@ void PacketCapture::Start(const std::string &filter, const std::string &file, Ca
 	Start(filter, pcap, callbackFactory);
 }
 
-void PacketCapture::Start(const std::string &filter, pcap_t *pcap, Callback::Factory callbackFactory)
+void PacketCapture::Start(const std::string &filter, pcap_t *pcap, Callback::Factory callbackFactory, std::string deviceName)
 {
 	wxCHECK2(pcap && callbackFactory, return);
 
@@ -92,7 +117,7 @@ void PacketCapture::Start(const std::string &filter, pcap_t *pcap, Callback::Fac
 	}
 
 	// Start thread
-	auto thread = std::thread([pcap, callbackFactory]() {
+	auto thread = std::thread([pcap, callbackFactory, deviceName]() {
 		auto handler = [](uint8_t *user, const pcap_pkthdr *header, const uint8_t *packet) {
 			if (header->caplen < header->len) {
 				wxLogWarning("truncated packet (%d of %d bytes)", header->caplen, header->len);
@@ -107,16 +132,19 @@ void PacketCapture::Start(const std::string &filter, pcap_t *pcap, Callback::Fac
 
 		Callback::Ptr callback = callbackFactory();
 		// Read packets
-		while (1) {
-			if (pcap_loop(pcap, -1, handler, (uint8_t*)callback.get()) < 0) {
-				wxLogError("pcap_loop: %s", pcap_geterr(pcap));
-			} else {
-				break;
-			}
+		if (pcap_loop(pcap, -1, handler, (uint8_t*)callback.get()) < 0) {
+			wxLogError("pcap_loop: %s", pcap_geterr(pcap));
 		}
 
 		wxLogWarning("pcap_loop exited");
 		pcap_close(pcap);
+
+		// We are no longer listening to this device, but if it becomes 
+		// available again the outter loop will start a new thread.
+		{
+			std::lock_guard<std::mutex> lock(mu);
+			deviceNames.erase(deviceName);
+		}
 	});
 
 	// <thread> will be deleted once it completes

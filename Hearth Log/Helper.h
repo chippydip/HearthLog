@@ -8,6 +8,7 @@
 class Helper
 {
 public:
+	static const std::string &AppVersion();
 	static wxFileName GetUserDataDir();
 	static std::uint64_t GetHearthstoneVersion();
 

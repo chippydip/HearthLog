@@ -3,6 +3,12 @@
 
 #include "Helper.h"
 
+const std::string &Helper::AppVersion()
+{
+	static const std::string version = "v0.2";
+	return version;
+}
+
 wxFileName Helper::GetUserDataDir()
 {
 	return wxFileName(wxStandardPaths::Get().GetUserDataDir(), "");

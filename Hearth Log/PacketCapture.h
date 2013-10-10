@@ -24,5 +24,5 @@ public:
 	static void Start(const std::string &filter,                           Callback::Factory callbackFactory);
 	static void Start(const std::string &filter, pcap_if_t *device,        Callback::Factory callbackFactory);
 	static void Start(const std::string &filter, const std::string &file,  Callback::Factory callbackFactory);
-	static void Start(const std::string &filter, pcap_t *pcap,             Callback::Factory callbackFactory);
+	static void Start(const std::string &filter, pcap_t *pcap,             Callback::Factory callbackFactory, std::string deviceName = "");
 };

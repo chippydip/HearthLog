@@ -160,7 +160,7 @@ void GameLogger::operator()(int64_t nanotime, std::range<const uint8_t *> data)
 				auto size = ptr[1];
 
 				// Sanity check the values
-				if (type > 1000 || size > 8184) {
+				if (type > 1000 || size > 8000) {
 					wxLogVerbose("%s canceling log (bad header: %d, %d)", _stream->Endpoints().SrcToDst(), type, size);
 					_log->Cancel();
 					swap_clear(_message);

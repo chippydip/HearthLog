@@ -68,10 +68,10 @@ void TaskBarIcon::OnAbout(wxCommandEvent& event)
 {
 	wxAboutDialogInfo about;
 	about.SetName("Hearth Log");
-	about.SetVersion("v0.1");
+	about.SetVersion(Helper::AppVersion());
 	about.SetDescription(_("Hearthstone game logger."));
-	about.SetCopyright("(C) 2013");
-	about.SetWebSite("http://hearthlog.com");
+	about.SetCopyright("(C) 2013 Chip Bradford");
+	about.SetWebSite("http://www.hearthlog.com");
 	about.SetIcon(wxIcon(favicon_32_32_8));
 
 	wxAboutBox(about);

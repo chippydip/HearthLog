@@ -13,19 +13,35 @@
 #include "GameLogger.h"
 
 #include "util.h"
+#include <fstream>
 
 IMPLEMENT_APP(HearthLogApp)
 
 TaskBarIcon *icon;
 
+std::ofstream fout;
+
 bool HearthLogApp::OnInit()
 {
-	auto log = new wxLogWindow(NULL, _("Log"), false, false);
-	log->GetFrame()->SetSize(1024, 300);
-	wxLog::SetActiveTarget(log);
-	wxLog::SetVerbose();
-	wxLogMessage(_("Hearth Log v0.1"));
+	// Open a file for logging
+	auto file = Helper::GetUserDataDir();
+	file.SetFullName("log.txt");
+	fout.open(file.GetFullPath().c_str().AsChar(), std::ofstream::out);
 
+	// Setup the log file
+	auto logFile = new wxLogStream(&fout);
+	wxLog::SetActiveTarget(logFile);
+
+	// Wrap the log file with a GUI window
+	auto logWindow = new wxLogWindow(NULL, _("Log"), false, true);
+	logWindow->GetFrame()->SetSize(1024, 300);
+	wxLog::SetActiveTarget(logWindow);
+
+	// Start logging
+	wxLog::SetVerbose();
+	wxLogMessage(_("Hearth Log %s"), Helper::AppVersion());
+
+	// Setup config from file
 	wxConfig::Set(new wxFileConfig("", "", "config.ini", "", wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_SUBDIR));
 
 	// Locate the Hearthstone directory
@@ -37,12 +53,11 @@ bool HearthLogApp::OnInit()
 		Helper::WriteConfig("HearthstoneDir", dir);
 	}
 
+	// Create the GUI bits
 	icon = new TaskBarIcon();
 
-	//gFrame->Show();
-	SetTopWindow(log->GetFrame());
-
-	PacketCapture::Start("tcp port 3724", 
+	// Setup a packet parsing stack
+	PacketCapture::Start("tcp port 3724 or tcp port 1119", 
 	//PacketCapture::Start("tcp port 1119", "C:\\Users\\Chip\\Documents\\Network Monitor 3\\Captures\\Hearthstone2.pcap", 
 		[]() -> PacketCapture::Callback::Ptr {
 			return std::make_unique<tcp::Parser>(
@@ -51,6 +66,7 @@ bool HearthLogApp::OnInit()
 				});
 		});
 
+	// Try to upload any logs that haven't been uploaded yet
 	icon->UploadAll();
 
 	return true;
