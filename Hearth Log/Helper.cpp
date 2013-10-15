@@ -5,7 +5,7 @@
 
 const std::string &Helper::AppVersion()
 {
-	static const std::string version = "v0.2";
+	static const std::string version = "v0.2.1";
 	return version;
 }
 

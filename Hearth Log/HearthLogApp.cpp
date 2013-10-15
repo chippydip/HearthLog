@@ -23,9 +23,17 @@ std::ofstream fout;
 
 bool HearthLogApp::OnInit()
 {
-	// Open a file for logging
+	// Build the path for a log file
 	auto file = Helper::GetUserDataDir();
 	file.SetFullName("log.txt");
+
+	// Create the containing directory if needed
+	if (!file.Mkdir(wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL)) {
+		wxLogError("error creating save directory: %s", file.GetPath());
+		return false;
+	}
+
+	// Open a file for logging
 	fout.open(file.GetFullPath().c_str().AsChar(), std::ofstream::out);
 
 	// Setup the log file
