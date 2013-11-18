@@ -11,7 +11,7 @@
 
 #include <algorithm>
 
-template <typename T> void swap_clear(T &v) { if (!v.empty()) v.swap(T()); }
+template <typename T> void swap_clear(T &v) { if (!v.empty()) { T x; v.swap(x); } }
 
 class GameLogger::Log
 {

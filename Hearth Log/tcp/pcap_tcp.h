@@ -35,6 +35,9 @@
 #include <pcap.h>
 
 
+#ifdef MAC_OS_X_VERSION_MIN_REQUIRED
+#include <arpa/inet.h>
+#endif
 
 /*******************************************************************************************/
 /* @(#) $Header: /tcpdump/master/tcpdump/ether.h,v 1.8 2002/12/11 07:13:51 guy Exp $ (LBL) */
