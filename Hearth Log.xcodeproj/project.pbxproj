@@ -1,0 +1,433 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		213DC55A183A7BEE00E6C61B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 213DC559183A7BEE00E6C61B /* Cocoa.framework */; };
+		213DC5B1183A8C1000E6C61B /* favicon-16x16-8.xpm in Resources */ = {isa = PBXBuildFile; fileRef = 213DC5AE183A8C1000E6C61B /* favicon-16x16-8.xpm */; };
+		213DC5B2183A8C1000E6C61B /* favicon-32x32-8.xpm in Resources */ = {isa = PBXBuildFile; fileRef = 213DC5AF183A8C1000E6C61B /* favicon-32x32-8.xpm */; };
+		213DC5B3183A8C1000E6C61B /* favicon-64x64-8.xpm in Resources */ = {isa = PBXBuildFile; fileRef = 213DC5B0183A8C1000E6C61B /* favicon-64x64-8.xpm */; };
+		21ACCC65183A9E2A00CF5643 /* HearthLogApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213DC590183A888200E6C61B /* HearthLogApp.cpp */; };
+		21ACCC67183A9E2A00CF5643 /* PacketCapture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213DC597183A88F800E6C61B /* PacketCapture.cpp */; };
+		21ACCC68183A9E2A00CF5643 /* TaskBarIcon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213DC594183A88B800E6C61B /* TaskBarIcon.cpp */; };
+		21ACCC69183A9E5200CF5643 /* Endpoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213DC59C183A893300E6C61B /* Endpoint.cpp */; };
+		21ACCC6A183A9E5200CF5643 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213DC59E183A893300E6C61B /* Parser.cpp */; };
+		21ACCC6B183A9E5200CF5643 /* Segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213DC5A1183A893300E6C61B /* Segment.cpp */; };
+		21ACCC6C183A9E5200CF5643 /* Stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213DC5A3183A893300E6C61B /* Stream.cpp */; };
+		21ACCC6E183A9E7F00CF5643 /* Helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21ACCC6D183A9E7F00CF5643 /* Helper.cpp */; };
+		21ACCC70183AA16C00CF5643 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 21ACCC6F183AA16C00CF5643 /* libpcap.dylib */; };
+		21ACCC71183AA1D400CF5643 /* GameLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 213DC5A9183A898300E6C61B /* GameLogger.cpp */; };
+		21ACCCB3183B00FE00CF5643 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21ACCCB2183B00FE00CF5643 /* CoreFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		213DC556183A7BEE00E6C61B /* Hearth Log.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hearth Log.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		213DC559183A7BEE00E6C61B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		213DC55C183A7BEE00E6C61B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		213DC55D183A7BEE00E6C61B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		213DC55E183A7BEE00E6C61B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		213DC561183A7BEE00E6C61B /* Hearth Log-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hearth Log-Info.plist"; sourceTree = "<group>"; };
+		213DC567183A7BEE00E6C61B /* Hearth Log-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hearth Log-Prefix.pch"; sourceTree = "<group>"; };
+		213DC590183A888200E6C61B /* HearthLogApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HearthLogApp.cpp; path = "Hearth Log/HearthLogApp.cpp"; sourceTree = "<group>"; };
+		213DC591183A888200E6C61B /* HearthLogApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HearthLogApp.h; path = "Hearth Log/HearthLogApp.h"; sourceTree = "<group>"; };
+		213DC593183A88A300E6C61B /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Helper.h; path = "Hearth Log/Helper.h"; sourceTree = "<group>"; };
+		213DC594183A88B800E6C61B /* TaskBarIcon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TaskBarIcon.cpp; path = "Hearth Log/TaskBarIcon.cpp"; sourceTree = "<group>"; };
+		213DC595183A88B800E6C61B /* TaskBarIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaskBarIcon.h; path = "Hearth Log/TaskBarIcon.h"; sourceTree = "<group>"; };
+		213DC597183A88F800E6C61B /* PacketCapture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PacketCapture.cpp; path = "Hearth Log/PacketCapture.cpp"; sourceTree = "<group>"; };
+		213DC598183A88F800E6C61B /* PacketCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PacketCapture.h; path = "Hearth Log/PacketCapture.h"; sourceTree = "<group>"; };
+		213DC59A183A891D00E6C61B /* range.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = range.h; path = "Hearth Log/range.h"; sourceTree = "<group>"; };
+		213DC59C183A893300E6C61B /* Endpoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Endpoint.cpp; sourceTree = "<group>"; };
+		213DC59D183A893300E6C61B /* Endpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Endpoint.h; sourceTree = "<group>"; };
+		213DC59E183A893300E6C61B /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
+		213DC59F183A893300E6C61B /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
+		213DC5A0183A893300E6C61B /* pcap_tcp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pcap_tcp.h; sourceTree = "<group>"; };
+		213DC5A1183A893300E6C61B /* Segment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Segment.cpp; sourceTree = "<group>"; };
+		213DC5A2183A893300E6C61B /* Segment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Segment.h; sourceTree = "<group>"; };
+		213DC5A3183A893300E6C61B /* Stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stream.cpp; sourceTree = "<group>"; };
+		213DC5A4183A893300E6C61B /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stream.h; sourceTree = "<group>"; };
+		213DC5A9183A898300E6C61B /* GameLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameLogger.cpp; path = "Hearth Log/GameLogger.cpp"; sourceTree = "<group>"; };
+		213DC5AA183A898300E6C61B /* GameLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameLogger.h; path = "Hearth Log/GameLogger.h"; sourceTree = "<group>"; };
+		213DC5AC183A8A3900E6C61B /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = util.h; path = "Hearth Log/util.h"; sourceTree = "<group>"; };
+		213DC5AE183A8C1000E6C61B /* favicon-16x16-8.xpm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "favicon-16x16-8.xpm"; sourceTree = "<group>"; };
+		213DC5AF183A8C1000E6C61B /* favicon-32x32-8.xpm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "favicon-32x32-8.xpm"; sourceTree = "<group>"; };
+		213DC5B0183A8C1000E6C61B /* favicon-64x64-8.xpm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "favicon-64x64-8.xpm"; sourceTree = "<group>"; };
+		21ACCC6D183A9E7F00CF5643 /* Helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Helper.cpp; path = "Hearth Log/Helper.cpp"; sourceTree = "<group>"; };
+		21ACCC6F183AA16C00CF5643 /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
+		21ACCCB2183B00FE00CF5643 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		213DC553183A7BEE00E6C61B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21ACCC70183AA16C00CF5643 /* libpcap.dylib in Frameworks */,
+				213DC55A183A7BEE00E6C61B /* Cocoa.framework in Frameworks */,
+				21ACCCB3183B00FE00CF5643 /* CoreFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		213DC54D183A7BEE00E6C61B = {
+			isa = PBXGroup;
+			children = (
+				213DC5AA183A898300E6C61B /* GameLogger.h */,
+				213DC5A9183A898300E6C61B /* GameLogger.cpp */,
+				213DC591183A888200E6C61B /* HearthLogApp.h */,
+				213DC590183A888200E6C61B /* HearthLogApp.cpp */,
+				213DC593183A88A300E6C61B /* Helper.h */,
+				21ACCC6D183A9E7F00CF5643 /* Helper.cpp */,
+				213DC5AD183A8C1000E6C61B /* icons */,
+				213DC598183A88F800E6C61B /* PacketCapture.h */,
+				213DC597183A88F800E6C61B /* PacketCapture.cpp */,
+				213DC59A183A891D00E6C61B /* range.h */,
+				213DC595183A88B800E6C61B /* TaskBarIcon.h */,
+				213DC594183A88B800E6C61B /* TaskBarIcon.cpp */,
+				213DC59B183A893300E6C61B /* tcp */,
+				213DC5AC183A8A3900E6C61B /* util.h */,
+				213DC55F183A7BEE00E6C61B /* Hearth Log */,
+				213DC558183A7BEE00E6C61B /* Frameworks */,
+				213DC557183A7BEE00E6C61B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		213DC557183A7BEE00E6C61B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				213DC556183A7BEE00E6C61B /* Hearth Log.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		213DC558183A7BEE00E6C61B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21ACCCB2183B00FE00CF5643 /* CoreFoundation.framework */,
+				21ACCC6F183AA16C00CF5643 /* libpcap.dylib */,
+				213DC559183A7BEE00E6C61B /* Cocoa.framework */,
+				213DC55B183A7BEE00E6C61B /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		213DC55B183A7BEE00E6C61B /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				213DC55C183A7BEE00E6C61B /* AppKit.framework */,
+				213DC55D183A7BEE00E6C61B /* CoreData.framework */,
+				213DC55E183A7BEE00E6C61B /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		213DC55F183A7BEE00E6C61B /* Hearth Log */ = {
+			isa = PBXGroup;
+			children = (
+				213DC560183A7BEE00E6C61B /* Supporting Files */,
+			);
+			path = "Hearth Log";
+			sourceTree = "<group>";
+		};
+		213DC560183A7BEE00E6C61B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				213DC561183A7BEE00E6C61B /* Hearth Log-Info.plist */,
+				213DC567183A7BEE00E6C61B /* Hearth Log-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		213DC59B183A893300E6C61B /* tcp */ = {
+			isa = PBXGroup;
+			children = (
+				213DC59C183A893300E6C61B /* Endpoint.cpp */,
+				213DC59D183A893300E6C61B /* Endpoint.h */,
+				213DC59E183A893300E6C61B /* Parser.cpp */,
+				213DC59F183A893300E6C61B /* Parser.h */,
+				213DC5A0183A893300E6C61B /* pcap_tcp.h */,
+				213DC5A1183A893300E6C61B /* Segment.cpp */,
+				213DC5A2183A893300E6C61B /* Segment.h */,
+				213DC5A3183A893300E6C61B /* Stream.cpp */,
+				213DC5A4183A893300E6C61B /* Stream.h */,
+			);
+			name = tcp;
+			path = "Hearth Log/tcp";
+			sourceTree = "<group>";
+		};
+		213DC5AD183A8C1000E6C61B /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				213DC5AE183A8C1000E6C61B /* favicon-16x16-8.xpm */,
+				213DC5AF183A8C1000E6C61B /* favicon-32x32-8.xpm */,
+				213DC5B0183A8C1000E6C61B /* favicon-64x64-8.xpm */,
+			);
+			name = icons;
+			path = "Hearth Log/icons";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		213DC555183A7BEE00E6C61B /* Hearth Log */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 213DC587183A7BEE00E6C61B /* Build configuration list for PBXNativeTarget "Hearth Log" */;
+			buildPhases = (
+				213DC552183A7BEE00E6C61B /* Sources */,
+				213DC553183A7BEE00E6C61B /* Frameworks */,
+				213DC554183A7BEE00E6C61B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Hearth Log";
+			productName = "Hearth Log";
+			productReference = 213DC556183A7BEE00E6C61B /* Hearth Log.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		213DC54E183A7BEE00E6C61B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = HLX;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Dan Langford";
+			};
+			buildConfigurationList = 213DC551183A7BEE00E6C61B /* Build configuration list for PBXProject "Hearth Log" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 213DC54D183A7BEE00E6C61B;
+			productRefGroup = 213DC557183A7BEE00E6C61B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				213DC555183A7BEE00E6C61B /* Hearth Log */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		213DC554183A7BEE00E6C61B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				213DC5B2183A8C1000E6C61B /* favicon-32x32-8.xpm in Resources */,
+				213DC5B3183A8C1000E6C61B /* favicon-64x64-8.xpm in Resources */,
+				213DC5B1183A8C1000E6C61B /* favicon-16x16-8.xpm in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		213DC552183A7BEE00E6C61B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21ACCC6E183A9E7F00CF5643 /* Helper.cpp in Sources */,
+				21ACCC65183A9E2A00CF5643 /* HearthLogApp.cpp in Sources */,
+				21ACCC71183AA1D400CF5643 /* GameLogger.cpp in Sources */,
+				21ACCC69183A9E5200CF5643 /* Endpoint.cpp in Sources */,
+				21ACCC6A183A9E5200CF5643 /* Parser.cpp in Sources */,
+				21ACCC6B183A9E5200CF5643 /* Segment.cpp in Sources */,
+				21ACCC6C183A9E5200CF5643 /* Stream.cpp in Sources */,
+				21ACCC67183A9E2A00CF5643 /* PacketCapture.cpp in Sources */,
+				21ACCC68183A9E2A00CF5643 /* TaskBarIcon.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		213DC585183A7BEE00E6C61B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		213DC586183A7BEE00E6C61B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		213DC588183A7BEE00E6C61B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hearth Log/Hearth Log-Prefix.pch";
+				INFOPLIST_FILE = "Hearth Log/Hearth Log-Info.plist";
+				OTHER_CFLAGS = (
+					"-I/usr/local/Cellar/wxmac/2.9.5.0/lib/wx/include/osx_cocoa-unicode-2.9",
+					"-I/usr/local/Cellar/wxmac/2.9.5.0/include/wx-2.9",
+					"-D_FILE_OFFSET_BITS=64",
+					"-DwxDEBUG_LEVEL=0",
+					"-DWXUSINGDLL",
+					"-D__WXMAC__",
+					"-D__WXOSX__",
+					"-D__WXOSX_COCOA__",
+				);
+				OTHER_LDFLAGS = (
+					"-L/usr/local/Cellar/wxmac/2.9.5.0/lib",
+					"-framework",
+					IOKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					System,
+					"-framework",
+					OpenGL,
+					"-framework",
+					QuickTime,
+					"-lwx_osx_cocoau-2.9",
+				);
+				PRODUCT_NAME = "Hearth Log";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		213DC589183A7BEE00E6C61B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hearth Log/Hearth Log-Prefix.pch";
+				INFOPLIST_FILE = "Hearth Log/Hearth Log-Info.plist";
+				OTHER_CFLAGS = (
+					"-I/usr/local/Cellar/wxmac/2.9.5.0/lib/wx/include/osx_cocoa-unicode-2.9",
+					"-I/usr/local/Cellar/wxmac/2.9.5.0/include/wx-2.9",
+					"-D_FILE_OFFSET_BITS=64",
+					"-DwxDEBUG_LEVEL=0",
+					"-DWXUSINGDLL",
+					"-D__WXMAC__",
+					"-D__WXOSX__",
+					"-D__WXOSX_COCOA__",
+				);
+				OTHER_LDFLAGS = (
+					"-L/usr/local/Cellar/wxmac/2.9.5.0/lib",
+					"-framework",
+					IOKit,
+					"-framework",
+					Carbon,
+					"-framework",
+					Cocoa,
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					System,
+					"-framework",
+					OpenGL,
+					"-framework",
+					QuickTime,
+					"-lwx_osx_cocoau-2.9",
+				);
+				PRODUCT_NAME = "Hearth Log";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		213DC551183A7BEE00E6C61B /* Build configuration list for PBXProject "Hearth Log" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				213DC585183A7BEE00E6C61B /* Debug */,
+				213DC586183A7BEE00E6C61B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		213DC587183A7BEE00E6C61B /* Build configuration list for PBXNativeTarget "Hearth Log" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				213DC588183A7BEE00E6C61B /* Debug */,
+				213DC589183A7BEE00E6C61B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 213DC54E183A7BEE00E6C61B /* Project object */;
+}
