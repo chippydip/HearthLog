@@ -64,7 +64,6 @@ std::uint64_t Helper::GetHearthstoneVersion()
 #endif
 
 #ifdef MAC_OS_X_VERSION_MIN_REQUIRED
-#pragma comment(lib, "version.lib")
 std::uint64_t Helper::GetHearthstoneVersion()
 {
     // TODO: implement this for MAC OS X _dL
