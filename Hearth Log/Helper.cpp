@@ -1,5 +1,7 @@
 #include <wx/stdpaths.h>
 #include <wx/log.h>
+#include <wx/dirdlg.h>
+#include <wx/filedlg.h>
 
 #include "Helper.h"
 
@@ -60,5 +62,16 @@ std::uint64_t Helper::GetHearthstoneVersion()
 	delete[] verData;
 
 	return 0;
+}
+
+bool Helper::FindHearthstone() {
+	while (!GetHearthstoneVersion()) {
+		auto dir = wxDirSelector(_("Hearth Log: Please locate your Hearthstone directory (Usually C:\\Program Files (x86)\\Hearthstone)"));
+		if (dir.empty()) {
+			return false;
+		}
+		Helper::WriteConfig("HearthstoneDir", dir);
+	}
+	return true;
 }
 #endif

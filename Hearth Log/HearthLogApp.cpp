@@ -2,7 +2,6 @@
 #include <wx/frame.h>
 #include <wx/config.h>
 #include <wx/fileconf.h>
-#include <wx/dirdlg.h>
 
 #include "HearthLogApp.h"
 
@@ -53,12 +52,8 @@ bool HearthLogApp::OnInit()
 	wxConfig::Set(new wxFileConfig("", "", "config.ini", "", wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_SUBDIR));
 
 	// Locate the Hearthstone directory
-	while (!Helper::GetHearthstoneVersion()) {
-		auto dir = wxDirSelector(_("Hearth Log: Please locate your Hearthstone directory (Usually C:\\Program Files (x86)\\Hearthstone)"));
-		if (dir.empty()) {
-			return false;
-		}
-		Helper::WriteConfig("HearthstoneDir", dir);
+	if (!Helper::FindHearthstone()) {
+		return false;
 	}
 
 	// Create the GUI bits
