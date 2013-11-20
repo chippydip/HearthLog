@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		211B0586183C755E00E770C8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 211B0585183C755E00E770C8 /* Images.xcassets */; };
 		213DC55A183A7BEE00E6C61B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 213DC559183A7BEE00E6C61B /* Cocoa.framework */; };
 		213DC5B1183A8C1000E6C61B /* favicon-16x16-8.xpm in Resources */ = {isa = PBXBuildFile; fileRef = 213DC5AE183A8C1000E6C61B /* favicon-16x16-8.xpm */; };
 		213DC5B2183A8C1000E6C61B /* favicon-32x32-8.xpm in Resources */ = {isa = PBXBuildFile; fileRef = 213DC5AF183A8C1000E6C61B /* favicon-32x32-8.xpm */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		211B0585183C755E00E770C8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		213DC556183A7BEE00E6C61B /* Hearth Log.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hearth Log.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		213DC559183A7BEE00E6C61B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		213DC55C183A7BEE00E6C61B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -129,6 +131,7 @@
 		213DC55F183A7BEE00E6C61B /* Hearth Log */ = {
 			isa = PBXGroup;
 			children = (
+				211B0585183C755E00E770C8 /* Images.xcassets */,
 				213DC560183A7BEE00E6C61B /* Supporting Files */,
 			);
 			path = "Hearth Log";
@@ -225,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				213DC5B2183A8C1000E6C61B /* favicon-32x32-8.xpm in Resources */,
+				211B0586183C755E00E770C8 /* Images.xcassets in Resources */,
 				213DC5B3183A8C1000E6C61B /* favicon-64x64-8.xpm in Resources */,
 				213DC5B1183A8C1000E6C61B /* favicon-16x16-8.xpm in Resources */,
 			);
