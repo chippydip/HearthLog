@@ -16,12 +16,24 @@ wxFileName Helper::GetUserDataDir()
 	return wxFileName(wxStandardPaths::Get().GetUserDataDir(), "");
 }
 
-#ifdef WIN32
+void logVersion(const wxString &path, std::uint64_t version)
+{
+	wxLogVerbose("%s v%u.%u.%u.%u", path, 
+		(std::uint16_t)(version >> 48),
+		(std::uint16_t)(version >> 32),
+		(std::uint16_t)(version >> 16),
+		(std::uint16_t)(version));
+}
+
+#ifdef _WIN32
 #include <windows.h>
 #pragma comment(lib, "version.lib")
 std::uint64_t Helper::GetHearthstoneVersion()
 {
+	// Check the config file for the location of Hearthstone.exe (or use the default)
 	auto dir = ReadConfig("HearthstoneDir", wxString("C:\\Program Files (x86)\\Hearthstone"));
+
+	// Make sure the .exe exists
 	wxFileName file(dir, "Hearthstone.exe");
 	auto path = file.GetFullPath();
 	if (!file.Exists()) {
@@ -29,6 +41,7 @@ std::uint64_t Helper::GetHearthstoneVersion()
 		return 0;
 	}
 	
+	// Get the size of the FileVersionInfo object
 	DWORD verHandle = NULL;
 	DWORD verSize   = GetFileVersionInfoSize(path.t_str(), &verHandle);
 	if (!verSize) {
@@ -36,6 +49,9 @@ std::uint64_t Helper::GetHearthstoneVersion()
 		return 0;
 	}
 
+	std::uint64_t version = 0;
+
+	// Jump through the hoops to get the file's version info
 	LPSTR  verData  = new char[verSize];
 	UINT   size     = 0;
 	LPBYTE lpBuffer = NULL;
@@ -50,83 +66,104 @@ std::uint64_t Helper::GetHearthstoneVersion()
 		if (verInfo->dwSignature != 0xfeef04bd) {
 			wxLogError("bad version signature (%s)", path);
 		} else {
-			auto version = (uint64_t)verInfo->dwFileVersionMS << 32 | verInfo->dwFileVersionLS;
-			wxLogVerbose("%s v%u.%u.%u.%u", path, 
-				(uint16_t)(version >> 48),
-				(uint16_t)(version >> 32),
-				(uint16_t)(version >> 16),
-				(uint16_t)(version));
-			return version;
+			version = (uint64_t)verInfo->dwFileVersionMS << 32 | verInfo->dwFileVersionLS;
+			logVersion(path, version);
+			// still need to cleanup verData
 		}
 	}
 	delete[] verData;
 
-	return 0;
+	return version;
 }
 
-bool Helper::FindHearthstone() {
+bool Helper::FindHearthstone()
+{
+	// If Hearthstone.exe isn't in the default location, prompt until the user locates it's directory for us.
 	while (!GetHearthstoneVersion()) {
 		auto dir = wxDirSelector(_("Hearth Log: Please locate your Hearthstone directory (Usually C:\\Program Files (x86)\\Hearthstone)"));
 		if (dir.empty()) {
 			return false;
 		}
+
+		// Save the location for next time
 		Helper::WriteConfig("HearthstoneDir", dir);
 	}
 	return true;
 }
 #endif
 
-#ifdef MAC_OS_X_VERSION_MIN_REQUIRED
-#include <CoreFoundation/CoreFoundation.h>
+#ifdef __APPLE__
+#include <wx/osx/core/cfstring.h>
+#include <wx/tokenzr.h>
 #include <CoreFoundation/CFURL.h>
+#include <CoreFoundation/CFBundle.h>
 std::uint64_t Helper::GetHearthstoneVersion()
 {
- 
-    const char* path = "/Applications/Hearthstone/Hearthstone.app";
-    CFStringRef appPath = CFStringCreateWithCString(NULL, path, kCFStringEncodingUTF8);
-    
-    CFURLRef url = CFURLCreateWithFileSystemPath(NULL, appPath, kCFURLPOSIXPathStyle, false);
-    CFBundleRef app = CFBundleCreate(NULL, url);
-    CFStringRef dictValue = (CFStringRef)CFBundleGetValueForInfoDictionaryKey(app, CFSTR("BlizzardFileVersion"));
-    
-    if(dictValue == NULL){
-        wxLogError("cannot find Blizzard File Version");
-        return 0;
-    }
-    
-    SInt32 first, second, third, fourth;
-    CFArrayRef arr = CFStringCreateArrayBySeparatingStrings(NULL, dictValue, CFSTR("."));
-    if(CFArrayGetCount(arr)==CFIndex(4)) {
-        first = CFStringGetIntValue((CFStringRef)CFArrayGetValueAtIndex(arr, CFIndex(0)));
-        second = CFStringGetIntValue((CFStringRef)CFArrayGetValueAtIndex(arr, CFIndex(1)));
-        third = CFStringGetIntValue((CFStringRef)CFArrayGetValueAtIndex(arr, CFIndex(2)));
-        fourth = CFStringGetIntValue((CFStringRef)CFArrayGetValueAtIndex(arr, CFIndex(3)));
-    } else {
-        wxLogError("unexpected version value or format");
-        return 0;
-    }
-    
-    uint64_t version = first;
-    version <<= 16;
-    version += second;
-    version <<= 16;
-    version += third;
-    version <<= 16;
-    version += fourth;
-    
-    // same exact log statement as the WIN32 code as a way to validate the number and format
-    wxLogVerbose("%s v%u.%u.%u.%u", path,
-        (uint16_t)(version >> 48),
-        (uint16_t)(version >> 32),
-        (uint16_t)(version >> 16),
-        (uint16_t)(version));
-    
-    // memory management
-    CFRelease(appPath);
-    CFRelease(url);
-    CFRelease(app);
-    CFRelease(arr);
-    
-    return version;
+	// Check the config file for the location of Hearthstone.app (or use the default)
+	auto path = ReadConfig("HearthstoneApp", wxString("/Applications/Hearthstone/Hearthstone.app"));
+
+	// Get the game version string from the app's info.plist
+	// NB: Using wx wrapper classes for automatic memory management and to ease the wxString<->CFStringRef conversions
+	wxCFStringRef cfPath(path);
+	wxCFRef<CFURLRef> cfUrl(CFURLCreateWithFileSystemPath(nullptr, cfPath, kCFURLPOSIXPathStyle, false));
+	wxCFRef<CFBundleRef> cfBundle(CFBundleCreate(nullptr, cfUrl));
+	wxCFStringRef cfVersion((CFStringRef)CFBundleGetValueForInfoDictionaryKey(cfApp, CFSTR("BlizzardFileVersion")));
+
+	// Back to wx-land
+	auto versionStr = cfVersion.AsString();
+
+	// Make sure the file version was found
+	if (versionStr.empty()) {
+		wxLogError("can't find BlizzardFileVersion in %s", path);
+		return 0;
+	}
+
+	// Tokenize the version string
+	wxStringTokenizer tokenizer(versionStr, ".");
+	std::uint64_t version = 0;
+	for (auto i = 0; i < 4; i++) {
+		// Get the next token
+		if (!tokenizer.HasMoreTokens() {
+			wxLogError("incomplete BlizzardFileVersion: %s", versionStr);
+			return 0;
+		}
+		auto s = tokenizer.GetNextToken();
+
+		// Parse it an an integer
+		long n;
+		if (!s.ToLong(&n)) {
+			wxLogError("error parsing BlizzardFileVersion: %s", versionStr);
+			return 0;
+		}
+
+		// Check the range
+		if (n < 0 || 65535 < n) {
+			wxLogError("BlizzardFileVersion value out of range: %ld", n);
+			return 0;
+		}
+
+		// Update the packed version number
+		version <<= 16;
+		version += (std::uint16_t)n;
+	}
+
+	// Log the result and return
+	logVersion(path, version);
+	return version;
+}
+
+bool Helper::FindHearthstone()
+{
+	// If Hearthstone.app isn't in the default location, prompt until the user locates it for us.
+	while (!GetHearthstoneVersion()) {
+		auto app = wxFileSelector(_("Hearth Log: Please locate your Hearthstone game (Usually /Applications/Hearthstone/Hearthstone.app)"));
+		if (app.empty()) {
+			return false;
+		}
+
+		// Save the location for next time
+		Helper::WriteConfig("HearthstoneApp", app);
+	}
+	return true;
 }
 #endif
