@@ -62,3 +62,58 @@ std::uint64_t Helper::GetHearthstoneVersion()
 	return 0;
 }
 #endif
+
+#ifdef MAC_OS_X_VERSION_MIN_REQUIRED
+#include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/CFURL.h>
+std::uint64_t Helper::GetHearthstoneVersion()
+{
+ 
+    const char* path = "/Applications/Hearthstone/Hearthstone.app";
+    CFStringRef appPath = CFStringCreateWithCString(NULL, path, kCFStringEncodingUTF8);
+    
+    CFURLRef url = CFURLCreateWithFileSystemPath(NULL, appPath, kCFURLPOSIXPathStyle, false);
+    CFBundleRef app = CFBundleCreate(NULL, url);
+    CFStringRef dictValue = (CFStringRef)CFBundleGetValueForInfoDictionaryKey(app, CFSTR("BlizzardFileVersion"));
+    
+    if(dictValue == NULL){
+        wxLogError("cannot find Blizzard File Version");
+        return 0;
+    }
+    
+    SInt32 first, second, third, fourth;
+    CFArrayRef arr = CFStringCreateArrayBySeparatingStrings(NULL, dictValue, CFSTR("."));
+    if(CFArrayGetCount(arr)==CFIndex(4)) {
+        first = CFStringGetIntValue((CFStringRef)CFArrayGetValueAtIndex(arr, CFIndex(0)));
+        second = CFStringGetIntValue((CFStringRef)CFArrayGetValueAtIndex(arr, CFIndex(1)));
+        third = CFStringGetIntValue((CFStringRef)CFArrayGetValueAtIndex(arr, CFIndex(2)));
+        fourth = CFStringGetIntValue((CFStringRef)CFArrayGetValueAtIndex(arr, CFIndex(3)));
+    } else {
+        wxLogError("unexpected version value or format");
+        return 0;
+    }
+    
+    uint64_t version = first;
+    version <<= 16;
+    version += second;
+    version <<= 16;
+    version += third;
+    version <<= 16;
+    version += fourth;
+    
+    // same exact log statement as the WIN32 code as a way to validate the number and format
+    wxLogVerbose("%s v%u.%u.%u.%u", path,
+        (uint16_t)(version >> 48),
+        (uint16_t)(version >> 32),
+        (uint16_t)(version >> 16),
+        (uint16_t)(version));
+    
+    // memory management
+    CFRelease(appPath);
+    CFRelease(url);
+    CFRelease(app);
+    CFRelease(arr);
+    
+    return version;
+}
+#endif
