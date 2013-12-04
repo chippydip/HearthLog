@@ -107,7 +107,7 @@ std::uint64_t Helper::GetHearthstoneVersion()
 	wxCFStringRef cfPath(path);
 	wxCFRef<CFURLRef> cfUrl(CFURLCreateWithFileSystemPath(nullptr, cfPath, kCFURLPOSIXPathStyle, false));
 	wxCFRef<CFBundleRef> cfBundle(CFBundleCreate(nullptr, cfUrl));
-	wxCFStringRef cfVersion((CFStringRef)CFBundleGetValueForInfoDictionaryKey(cfApp, CFSTR("BlizzardFileVersion")));
+	wxCFStringRef cfVersion((CFStringRef)CFBundleGetValueForInfoDictionaryKey(cfBundle, CFSTR("BlizzardFileVersion")));
 
 	// Back to wx-land
 	auto versionStr = cfVersion.AsString();
@@ -123,7 +123,7 @@ std::uint64_t Helper::GetHearthstoneVersion()
 	std::uint64_t version = 0;
 	for (auto i = 0; i < 4; i++) {
 		// Get the next token
-		if (!tokenizer.HasMoreTokens() {
+		if (!tokenizer.HasMoreTokens()) {
 			wxLogError("incomplete BlizzardFileVersion: %s", versionStr);
 			return 0;
 		}
