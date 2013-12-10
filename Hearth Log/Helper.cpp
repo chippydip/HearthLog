@@ -107,9 +107,9 @@ std::uint64_t Helper::GetHearthstoneVersion()
 	wxCFStringRef cfPath(path);
 	wxCFRef<CFURLRef> cfUrl(CFURLCreateWithFileSystemPath(nullptr, cfPath, kCFURLPOSIXPathStyle, false));
 	wxCFRef<CFBundleRef> cfBundle(CFBundleCreate(nullptr, cfUrl));
-	wxCFStringRef cfVersion((CFStringRef)CFBundleGetValueForInfoDictionaryKey(cfBundle, CFSTR("BlizzardFileVersion")));
 
-	// Back to wx-land
+	// Get the version string (Get rule, so no need to deallocate with a wrapper) and then transition back to wx-land
+	auto cfVersion = (CFStringRef)CFBundleGetValueForInfoDictionaryKey(cfBundle, CFSTR("BlizzardFileVersion"));
 	auto versionStr = cfVersion.AsString();
 
 	// Make sure the file version was found
