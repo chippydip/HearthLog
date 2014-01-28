@@ -336,8 +336,8 @@
 				GCC_PREFIX_HEADER = "Hearth Log/Hearth Log-Prefix.pch";
 				INFOPLIST_FILE = "Hearth Log/Hearth Log-Info.plist";
 				OTHER_CFLAGS = (
-					"-I/usr/local/Cellar/wxmac/2.9.5.0/lib/wx/include/osx_cocoa-unicode-2.9",
-					"-I/usr/local/Cellar/wxmac/2.9.5.0/include/wx-2.9",
+					"-I/usr/local/Cellar/wxmac/3.0.0.0/lib/wx/include/osx_cocoa-unicode-3.0",
+					"-I/usr/local/Cellar/wxmac/3.0.0.0/include",
 					"-D_FILE_OFFSET_BITS=64",
 					"-DwxDEBUG_LEVEL=0",
 					"-DWXUSINGDLL",
@@ -346,7 +346,7 @@
 					"-D__WXOSX_COCOA__",
 				);
 				OTHER_LDFLAGS = (
-					"-L/usr/local/Cellar/wxmac/2.9.5.0/lib",
+					"-L/usr/local/Cellar/wxmac/3.0.0.0/lib",
 					"-framework",
 					IOKit,
 					"-framework",
@@ -361,7 +361,7 @@
 					OpenGL,
 					"-framework",
 					QuickTime,
-					"-lwx_osx_cocoau-2.9",
+					"-lwx_osx_cocoau-3.0",
 				);
 				PRODUCT_NAME = "Hearth Log";
 				WRAPPER_EXTENSION = app;
@@ -378,8 +378,8 @@
 				GCC_PREFIX_HEADER = "Hearth Log/Hearth Log-Prefix.pch";
 				INFOPLIST_FILE = "Hearth Log/Hearth Log-Info.plist";
 				OTHER_CFLAGS = (
-					"-I/usr/local/Cellar/wxmac/2.9.5.0/lib/wx/include/osx_cocoa-unicode-2.9",
-					"-I/usr/local/Cellar/wxmac/2.9.5.0/include/wx-2.9",
+					"-I/usr/local/Cellar/wxmac/3.0.0.0/lib/wx/include/osx_cocoa-unicode-3.0",
+					"-I/usr/local/Cellar/wxmac/3.0.0.0/include",
 					"-D_FILE_OFFSET_BITS=64",
 					"-DwxDEBUG_LEVEL=0",
 					"-DWXUSINGDLL",
@@ -388,7 +388,7 @@
 					"-D__WXOSX_COCOA__",
 				);
 				OTHER_LDFLAGS = (
-					"-L/usr/local/Cellar/wxmac/2.9.5.0/lib",
+					"-L/usr/local/Cellar/wxmac/3.0.0.0/lib",
 					"-framework",
 					IOKit,
 					"-framework",
@@ -403,7 +403,7 @@
 					OpenGL,
 					"-framework",
 					QuickTime,
-					"-lwx_osx_cocoau-2.9",
+					"-lwx_osx_cocoau-3.0",
 				);
 				PRODUCT_NAME = "Hearth Log";
 				WRAPPER_EXTENSION = app;
